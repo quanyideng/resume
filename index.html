@@ -2,10 +2,51 @@
 <html>
 
 <head>
-  <title>方方的个人简历</title>
-  <link rel="stylesheet" href="./a.css">
+  <title>闰涟的个人简历</title>
+  <link rel="stylesheet" href="./main.css">
+  <link rel="stylesheet" href="./loading.css">
   <script src="//at.alicdn.com/t/font_451045_32zbfqegtq3t0529.js"></script>
   <style type="text/css">
+    .loading {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .loading::before,
+    .loading::after {
+      content: " ";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: black;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      animation: loading 1.5s linear infinite;
+    }
+
+    .loading::after {
+      animation-delay: 0.75s
+    }
+
+    @keyframes loading {
+      0% {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+      }
+
+      100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+      }
+    }
+
     .icon {
       width: 1em;
       height: 1em;
@@ -13,39 +54,60 @@
       fill: currentColor;
       overflow: hidden;
     }
+
+    .site-welcome {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #888;
+      z-index: 1;
+      /* display: flex; */
+      justify-content: center;
+      align-items: center;
+    }
+
+    .site-welcome.active {
+      display: flex;
+    }
   </style>
 </head>
 
 <body>
-  <div class="topNavBar">
+  <div id="siteWelcome" class="site-welcome active">
+    <div class="loading"></div>
+  </div>
+  <div id="topNavBar" class="topNavBar">
     <div class="topNavBar-inner clearfix">
       <a class="logo" href="#" alt="logo" style="float: left;">
         <span class="rs">RS</span>
         <span class="card">card</span>
       </a>
-      <nav style="float: right;">
+      <nav class="menu" style="float: right;">
         <ul class="clearfix">
           <li>
-            <a href="#">关于</a>
+            <a href="#siteAbout">关于</a>
           </li>
           <li>
-            <a href="#">技能</a>
+            <a href="#siteSkills">技能</a>
           </li>
           <li>
-            <a href="#">作品</a>
+            <a href="#siteWorks">作品</a>
           </li>
           <li>
-            <a href="#">博客</a>
+            <a href="https://quanyideng.github.io/blog/">博客</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#">日历</a>
-          </li>
+          </li> -->
           <li>
             <a href="#">联系方式</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#">其他</a>
-          </li>
+          </li> -->
         </ul>
       </nav>
     </div>
@@ -53,8 +115,8 @@
   <div class="banner">
     <div class="mask"></div>
   </div>
-  <main style="">
-    <div class="userCard">
+  <main>
+    <div id="siteAbout" class="userCard">
       <div class="pictureAndText clearfix">
         <div class="picture">
           <img src="./img/avatar.jpg" width=299 height=347 alt="头像">
@@ -79,12 +141,12 @@
         </div>
       </div>
       <footer class="media">
-        <a href="#">
+        <a href="https://github.com/quanyideng">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-github"></use>
           </svg>
         </a>
-        <a href="#">
+        <!-- <a href="#">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-Ankerwebicon-"></use>
           </svg>
@@ -93,7 +155,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-weibo"></use>
           </svg>
-        </a>
+        </a> -->
       </footer>
     </div>
 
@@ -107,7 +169,7 @@
     </p>
 
   </main>
-  <section class="skills">
+  <section id="siteSkills" class="skills">
     <h2>技能</h2>
     <ol class="clearfix">
       <li>
@@ -147,7 +209,7 @@
           React.js
         </h3>
         <div class="progressBar">
-          <div class="progress"  style="width: 50%"></div>
+          <div class="progress" style="width: 50%"></div>
         </div>
       </li>
       <li>
@@ -155,12 +217,12 @@
           Node.js
         </h3>
         <div class="progressBar">
-          <div class="progress"  style="width: 60%"></div>
+          <div class="progress" style="width: 60%"></div>
         </div>
       </li>
     </ol>
   </section>
-  <section class="portfolio">
+  <section id="siteWorks" class="portfolio">
     <h2>作品集</h2>
     <nav>
       <ol class="clearfix">
@@ -173,13 +235,13 @@
       </div>
     </nav>
     <script>
-      portfolio1.onclick= function(){
+      portfolio1.onclick = function () {
         portfolioBar.className = 'bar state-1'
       }
-      portfolio2.onclick= function(){
+      portfolio2.onclick = function () {
         portfolioBar.className = 'bar state-2'
       }
-      portfolio3.onclick= function(){
+      portfolio3.onclick = function () {
         portfolioBar.className = 'bar state-3'
       }
     </script>
@@ -198,6 +260,33 @@
     </div>
 
   </section>
+  <script>
+    setTimeout(function() {
+      siteWelcome.classList.remove("active")
+      window.scrollTo(0, 0)
+    }, 1500);
+
+    window.onscroll = function() {
+      if(window.scrollY > 0) {
+        topNavBar.classList.add('sticky')
+      } else {
+        topNavBar.classList.remove('sticky')
+      }
+    }
+
+    let aTag = document.querySelectorAll('nav.menu > ul > li > a')
+    console.log('aTag', aTag);
+    for (let i = 0 ; i < aTag.length - 2; i++) {
+      aTag[i].onclick = function(x) {
+        x.preventDefault()
+        let a = x.currentTarget;
+        let href = a.getAttribute('href')
+        let element = document.querySelector(href)
+        let top = element.offsetTop
+        window.scrollTo(0, top - 80)
+      } 
+    }
+  </script>
 </body>
 
 </html>
