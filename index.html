@@ -4,7 +4,7 @@
 <head>
   <title>闰涟的个人简历</title>
   <link rel="stylesheet" href="./main.css">
-  <link rel="stylesheet" href="./loading.css">
+  <link rel="shortcut icon" href="./resume_favicon.ico" type="image/x-icon">
   <script src="//at.alicdn.com/t/font_451045_32zbfqegtq3t0529.js"></script>
   <style type="text/css">
     .loading {
@@ -119,24 +119,27 @@
     <div id="siteAbout" class="userCard">
       <div class="pictureAndText clearfix">
         <div class="picture">
-          <img src="./img/avatar.jpg" width=299 height=347 alt="头像">
+          <!-- <img src="./img/avatar.jpg" width=299 height=347 alt="头像"> -->
         </div>
         <div class="text">
-          <span class="welcome">Hello
+          <!-- <span class="welcome">Hello
             <span class="triangle"></span>
-          </span>
-          <h1>方应杭</h1>
-          <p>前端开发工程师</p>
+          </span> -->
+          <h1 style="font-weight: bold;">邓宜全</h1>
           <hr>
           <dl>
+            <dt>应聘职位</dt>
+            <dd>前端开发工程师</dd>
+            <dt>学历</dt>
+            <dd>本科</dd>
             <dt>年龄</dt>
-            <dd>18</dd>
-            <dt>所在城市</dt>
-            <dd>北京</dd>
+            <dd>23</dd>
             <dt>邮箱</dt>
-            <dd>fangyinghang@foxmail.com</dd>
+            <dd>13642582346@163.com</dd>
             <dt>手机</dt>
-            <dd>13812345678</dd>
+            <dd>13642582346</dd>
+            <dt>所在城市</dt>
+            <dd>广州</dd>
           </dl>
         </div>
       </div>
@@ -163,10 +166,10 @@
       <a class="downloadResume" href="./resume.pdf" target="_blank" download>下载 PDF 简历</a>
     </p>
 
-    <p class="selfIntroduction">
+    <!-- <p class="selfIntroduction">
       方应杭， 资深前端工程师，资深前端讲师，现在在 饥人谷 教前端课程。
       <br> 技能：前端开发，Rails 开发，Node.js 开发
-    </p>
+    </p> -->
 
   </main>
   <section id="siteSkills" class="skills">
@@ -275,7 +278,6 @@
     }
 
     let aTag = document.querySelectorAll('nav.menu > ul > li > a')
-    console.log('aTag', aTag);
     for (let i = 0 ; i < aTag.length - 2; i++) {
       aTag[i].onclick = function(x) {
         x.preventDefault()
@@ -283,7 +285,21 @@
         let href = a.getAttribute('href')
         let element = document.querySelector(href)
         let top = element.offsetTop
-        window.scrollTo(0, top - 80)
+
+        let n = 20
+        let duration = 500 / n
+        let currentTop = window.scrollY
+        let targetTop = top - 80
+        let distance = (targetTop - currentTop) / n
+        let i = 0
+        setInterval(() => {
+          if(i == n) {
+            window.clearInterval()
+            return
+          }
+          i += 1
+          window.scrollTo(0, currentTop + distance * i)
+        }, duration)
       } 
     }
   </script>
